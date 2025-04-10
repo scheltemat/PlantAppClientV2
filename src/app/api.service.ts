@@ -1,17 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+
+interface HealthCheckResponse {
+  message: string;
+}
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
-  private baseUrl = "http://localhost:5005";
+  private baseUrl = "http://localhost:5000";
 
   constructor(private http: HttpClient) {}
 
-  getHealthCheck(): Observable<{ message: string }> {
-    // Specify the expected response type
-    return this.http.get<{ message: string }>(this.baseUrl); // Remove responseType: 'text'
+  getHealthCheck(): Observable<HealthCheckResponse> {
+    return this.http.get<HealthCheckResponse>(this.baseUrl);
   }
 }
