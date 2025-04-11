@@ -1,16 +1,27 @@
 import { Routes } from "@angular/router";
-import { HealthCheckComponent } from "./health-check/health-check.component";
-import { HomeComponent } from "./home/home.component";
-import { NotFoundComponent } from "./not-found/not-found.component";
+import { AuthGuard } from "./auth/auth.guard";
+import { HealthCheckComponent } from "./pages/health-check/health-check.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 export const routes: Routes = [
+  // Unauthenticated routes
   {
     path: "health-check",
     component: HealthCheckComponent,
     title: "Health Check",
   },
-  { path: "", component: HomeComponent, title: "Home" }, // doesn't need "/"
+  { path: "login", component: LoginComponent, title: "Login" },
 
-  // Redirect for unmatched paths
+  // Authenticated routes
+  {
+    path: "",
+    component: HomeComponent,
+    title: "Home",
+    canActivate: [AuthGuard],
+  },
+
+  // Edge case for invalid routes
   { path: "**", component: NotFoundComponent, title: "Page Not Found" },
 ];
