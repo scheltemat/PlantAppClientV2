@@ -4,6 +4,8 @@ import { HealthCheckComponent } from "./pages/health-check/health-check.componen
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { FindPlantComponent } from "./pages/find-plant/find-plant.component";
+import { FindSinglePlantComponent } from "./pages/find-single-plant/find-single-plant.component";
 
 export const routes: Routes = [
   // Unauthenticated routes
@@ -19,6 +21,18 @@ export const routes: Routes = [
     path: "",
     component: HomeComponent,
     title: "Home",
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "find-a-plant",
+    component: FindPlantComponent,
+    title: "Search Plants",
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "find-a-plant/:id",
+    component: FindSinglePlantComponent,
+    title: "View Plant",
     canActivate: [AuthGuard],
   },
 
