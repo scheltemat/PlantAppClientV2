@@ -1,0 +1,170 @@
+.search-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-box {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.search-box button {
+  padding: 0 2rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.search-box button:hover {
+  background-color: #3e8e41;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #fde0e0;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  color: #666;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.results-container h3 {
+  margin: 2rem 0 1rem;
+  color: #333;
+}
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.plant-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.plant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.plant-image-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.plant-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.plant-card:hover .plant-image {
+  transform: scale(1.05);
+}
+
+.plant-details {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.plant-name {
+  margin: 0 0 0.5rem;
+  color: #2e7d32;
+  font-size: 1.25rem;
+}
+
+.scientific-name {
+  margin: 0 0 1rem;
+  color: #666;
+  font-style: italic;
+}
+
+.plant-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 60px; /* Fixed height for meta section */
+}
+
+.plant-meta span {
+  background-color: #f5f5f5;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  height: fit-content;
+}
+
+.add-button-container {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.add-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.add-button:hover {
+  background-color: #1b5e20;
+}

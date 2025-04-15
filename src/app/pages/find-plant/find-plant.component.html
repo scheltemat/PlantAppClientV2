@@ -1,0 +1,74 @@
+<div class="search-container">
+  <h2>Search Plants</h2>
+
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search for plants..."
+      (keyup.enter)="searchPlants()"
+    />
+    <button (click)="searchPlants()">Search</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+    <span>Searching plants...</span>
+  </div>
+
+  <div *ngIf="searchResults.length > 0" class="results-container">
+    <h3>Found {{ searchResults.length }} plants</h3>
+
+    <div class="plants-grid">
+      <div
+        class="plant-card"
+        *ngFor="let plant of searchResults"
+        [routerLink]="['/find-a-plant', plant.id]"
+        style="cursor: pointer"
+      >
+        <div class="plant-image-container">
+          <img
+            [src]="plant.images.thumb"
+            [alt]="plant.name"
+            class="plant-image"
+            (error)="handleImageError($event)"
+          />
+        </div>
+
+        <div class="plant-details">
+          <h4 class="plant-name">{{ plant.name }}</h4>
+          <p class="scientific-name">
+            <em>{{ plant.scientific_name }}</em>
+          </p>
+
+          <div class="plant-meta">
+            <span *ngIf="getPlantData(plant, 'Life cycle')">
+              <i class="fas fa-seedling"></i>
+              {{ getPlantData(plant, "Life cycle") }}
+            </span>
+            <span *ngIf="getPlantData(plant, 'Light requirement')">
+              <i class="fas fa-sun"></i>
+              {{ getPlantData(plant, "Light requirement") }}
+            </span>
+            <span *ngIf="getPlantData(plant, 'Family')">
+              <i class="fas fa-leaf"></i> {{ getPlantData(plant, "Family") }}
+            </span>
+          </div>
+
+          <div class="add-button-container">
+            <button
+              class="add-button"
+              (click)="addToGarden(plant.id, plant.name)"
+            >
+              <i class="fas fa-plus"></i> Add to Garden
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
