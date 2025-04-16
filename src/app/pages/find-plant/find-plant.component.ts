@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { ApiService } from "../../api.service";
+import { ApiService, ExternalPlant, AddPlantRequest } from "../../api.service";
 import { RouterModule } from "@angular/router";
 
 @Component({
@@ -13,7 +13,7 @@ import { RouterModule } from "@angular/router";
 })
 export class FindPlantComponent {
   searchQuery: string = "";
-  searchResults: any[] = [];
+  searchResults: ExternalPlant[] = [];
   isLoading: boolean = false;
   errorMessage: string = "";
 
@@ -44,20 +44,26 @@ export class FindPlantComponent {
     });
   }
 
-  addToGarden(plantId: number, plantName: string) {
-    this.apiService.addPlantToGarden(plantId).subscribe({
+  addToGarden(plant: ExternalPlant) {
+    const plantToSend: AddPlantRequest = {
+      id: plant.id,
+      name: plant.name,
+      imageUrl: plant.images?.thumb || "",
+    };
+
+    this.apiService.addPlantToGarden(plantToSend).subscribe({
       next: () => {
-        alert(`${plantName} added to your garden successfully!`);
+        alert(`${plant.name} added to your garden successfully!`);
       },
       error: (err) => {
         console.error("Error adding plant:", err);
-        alert(`Failed to add ${plantName} to your garden. Please try again.`);
+        alert(`Failed to add ${plant.name} to your garden. Please try again.`);
       },
     });
   }
 
-  getPlantData(plant: any, key: string): string | undefined {
-    const item = plant.data.find((d: any) => d.key === key);
+  getPlantData(plant: ExternalPlant, key: string): string | undefined {
+    const item = plant.data.find((d) => d.key === key);
     return item?.value;
   }
 

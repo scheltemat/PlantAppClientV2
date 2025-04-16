@@ -1,0 +1,23 @@
+<nav class="navbar plant-navbar" *ngIf="isLoggedIn">
+  <div class="navbar-container">
+    <!-- Left-aligned brand and nav links -->
+    <div class="navbar-left">
+      <a class="navbar-brand" routerLink="/">
+        <span class="brand-icon">🌿</span>
+        <span class="brand-text">PlantApp</span>
+      </a>
+      
+      <div class="nav-links">
+        <a class="nav-link" routerLink="/find-a-plant" routerLinkActive="active">Search Plants</a>
+        <!-- <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a> -->
+      </div>
+    </div>
+    
+    <!-- Right-aligned sign-out button -->
+    <div class="navbar-right">
+      <button class="sign-out-btn" (click)="signOut()">
+        <span class="sign-out-text">Sign Out</span>
+      </button>
+    </div>
+  </div>
+</nav>
