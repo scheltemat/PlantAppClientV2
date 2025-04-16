@@ -1,17 +1,8 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
-
-// Response from backend health check
-interface HealthCheckResponse {
-  message: string;
-}
-
-// Auth response
-interface LoginResponse {
-  token: string;
-}
+import { AuthService } from "./services/auth/auth.service";
 
 // Metadata for external plant data
 interface PlantData {
@@ -58,29 +49,11 @@ interface PlantSearchResponse {
 export class ApiService {
   private baseUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {}
-
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem("jwt_token");
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-  }
-
-  getHealthCheck(): Observable<HealthCheckResponse> {
-    return this.http.get<HealthCheckResponse>(this.baseUrl);
-  }
-
-  login(email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.baseUrl}/api/auth/login`, {
-      email,
-      password,
-    });
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getUserPlants(): Observable<UserPlant[]> {
     return this.http.get<UserPlant[]>(`${this.baseUrl}/api/user-plants`, {
-      headers: this.getAuthHeaders(),
+      headers: this.authService.getAuthHeaders(),
     });
   }
 
@@ -89,14 +62,27 @@ export class ApiService {
       `${this.baseUrl}/api/external/plants/search`,
       {
         params: { query: query.trim() },
-        headers: this.getAuthHeaders(),
+        headers: this.authService.getAuthHeaders(),
+      }
+    );
+  }
+
+  getPlantById(id: number): Observable<ExternalPlant> {
+    return this.http.get<ExternalPlant>(
+      `${this.baseUrl}/api/external/plants/${id}`,
+      {
+        headers: this.authService.getAuthHeaders(),
       }
     );
   }
 
   addPlantToGarden(plant: AddPlantRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/user-plants`, plant, {
-      headers: this.getAuthHeaders(),
+      headers: this.authService.getAuthHeaders(),
     });
+  }
+
+  removePlantFromGarden(plantId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/api/user-plants/${plantId}`);
   }
 }

@@ -6,8 +6,7 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { ApiService } from "../../api.service";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../../services/auth/auth.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -23,7 +22,6 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -48,7 +46,7 @@ export class LoginComponent {
     this.isLoading = true;
     const { email, password } = this.loginForm.value;
 
-    this.apiService.login(email, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (res) => {
         this.isLoading = false;
         this.authService.storeToken(res.token);

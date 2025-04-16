@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { ApiService } from "../../api.service";
+import { HealthService } from "../../services/api-health/health.service";
 
 @Component({
   selector: "app-health-check",
@@ -13,7 +13,7 @@ export class HealthCheckComponent {
   message: string = "";
   loading: boolean = true;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: HealthService) {}
 
   ngOnInit(): void {
     this.api.getHealthCheck().subscribe({

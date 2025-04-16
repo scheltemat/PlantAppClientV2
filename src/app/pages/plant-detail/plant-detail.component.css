@@ -1,0 +1,65 @@
+.plant-detail-container {
+  padding: 1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.plant-image-wrapper {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.plant-detail-image {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.scientific-name {
+  color: gray;
+  font-style: italic;
+}
+
+.plant-description {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.plant-meta p {
+  margin: 0.5rem 0;
+}
+
+.add-to-garden-wrapper {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.add-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover:enabled {
+  background-color: #45a049;
+}
+
+.add-button:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.loading-spinner {
+  text-align: center;
+  margin-top: 2rem;
+}
