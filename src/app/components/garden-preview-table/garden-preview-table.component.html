@@ -1,0 +1,18 @@
+<h3>Garden Preview</h3>
+<table class="dashboard-table garden-preview-table">
+  <tr *ngFor="let plant of plants">
+    <td class="img-cell">
+      <img
+        [src]="plant.imageUrl"
+        (error)="handleImageError($event)"
+        alt="{{ plant.name }}"
+        class="mini-plant-img"
+      />
+    </td>
+    <td class="name-cell">{{ plant.name }}</td>
+  </tr>
+</table>
+
+<div *ngIf="plants.length === 0" class="empty-state">
+  Your garden is empty.
+</div>

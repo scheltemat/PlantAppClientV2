@@ -1,0 +1,49 @@
+<div *ngIf="plant && !isLoading" class="plant-detail-container">
+  <h2>{{ plant.name }}</h2>
+  <p class="scientific-name"><em>{{ plant.scientific_name }}</em></p>
+
+  <div class="plant-image-wrapper">
+    <img
+      [src]="plant.images.thumb"
+      [alt]="plant.name"
+      class="plant-detail-image"
+      (error)="handleImageError($event)"
+    />
+  </div>
+
+  <div class="plant-meta">
+    <p *ngIf="getPlantData('Life cycle')">
+      🌱 <strong>Life Cycle:</strong> {{ getPlantData('Life cycle') }}
+    </p>
+    <p *ngIf="getPlantData('Light requirement')">
+      ☀️ <strong>Light Requirement:</strong> {{ getPlantData('Light requirement') }}
+    </p>
+    <p *ngIf="getPlantData('Family')">
+      🍃 <strong>Family:</strong> {{ getPlantData('Family') }}
+    </p>
+  </div>
+
+  <div class="plant-description">
+    <p>{{ plant.description }}</p>
+  </div>
+
+  <div class="add-to-garden-wrapper">
+    <button
+      class="add-button"
+      [disabled]="isAdding"
+      (click)="addToGarden()"
+    >
+      <i class="fas fa-plus"></i>
+      {{ isAdding ? "Adding..." : "Add to Garden" }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <div class="spinner"></div>
+  <span>Loading plant details...</span>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>

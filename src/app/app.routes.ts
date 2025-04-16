@@ -1,11 +1,12 @@
 import { Routes } from "@angular/router";
-import { AuthGuard } from "./auth/auth.guard";
+import { AuthGuard } from "./services/auth/auth.guard";
 import { HealthCheckComponent } from "./pages/health-check/health-check.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { FindPlantComponent } from "./pages/find-plant/find-plant.component";
-import { FindSinglePlantComponent } from "./pages/find-single-plant/find-single-plant.component";
+import { PlantDetailComponent } from "./pages/plant-detail/plant-detail.component";
+import { GardenComponent } from "./pages/garden/garden.component";
 
 export const routes: Routes = [
   // Unauthenticated routes
@@ -20,7 +21,13 @@ export const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
-    title: "Home",
+    title: "Dashboard",
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "garden",
+    component: GardenComponent,
+    title: "My Garden",
     canActivate: [AuthGuard],
   },
   {
@@ -31,7 +38,7 @@ export const routes: Routes = [
   },
   {
     path: "find-a-plant/:id",
-    component: FindSinglePlantComponent,
+    component: PlantDetailComponent,
     title: "View Plant",
     canActivate: [AuthGuard],
   },

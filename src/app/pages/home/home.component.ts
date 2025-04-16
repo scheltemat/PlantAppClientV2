@@ -1,44 +1,42 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ApiService, UserPlant } from "../../api.service";
+import { CareRemindersTableComponent } from "../../components/care-reminders-table/care-reminders-table.component";
+import { GardenPreviewTableComponent } from "../../components/garden-preview-table/garden-preview-table.component";
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    CareRemindersTableComponent,
+    GardenPreviewTableComponent,
+  ],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  userPlants: UserPlant[] = [];
-  isLoading: boolean = false;
-  errorMessage: string = "";
+  careReminders = [
+    { plantName: "Fiddle Leaf Fig", task: "Water", dueDate: new Date() },
+    {
+      plantName: "Snake Plant",
+      task: "Fertilize",
+      dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+    },
+  ];
+
+  miniUserPlants: UserPlant[] = [];
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.loadUserPlants();
+    this.loadMiniGardenPreview();
   }
 
-  loadUserPlants() {
-    this.isLoading = true;
-    this.errorMessage = "";
-
+  loadMiniGardenPreview() {
     this.apiService.getUserPlants().subscribe({
-      next: (plants) => {
-        this.userPlants = plants;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.errorMessage = "Failed to load your garden. Please try again.";
-        this.isLoading = false;
-        console.error(err);
-      },
+      next: (plants) => (this.miniUserPlants = plants),
+      error: (err) => console.error("Error loading garden preview:", err),
     });
-  }
-
-  handleImageError(event: Event) {
-    const img = event.target as HTMLImageElement;
-    img.src = "assets/images/default-plant.jpg";
   }
 }

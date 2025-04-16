@@ -44,7 +44,8 @@ export class FindPlantComponent {
     });
   }
 
-  addToGarden(plant: ExternalPlant) {
+  addToGarden(plant: ExternalPlant, event: MouseEvent) {
+    event.stopPropagation(); // Prevent card click
     const plantToSend: AddPlantRequest = {
       id: plant.id,
       name: plant.name,

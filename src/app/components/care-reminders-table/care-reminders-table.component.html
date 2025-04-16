@@ -1,0 +1,9 @@
+<h3>Watering Reminders</h3>
+<table class="dashboard-table">
+  <tr *ngFor="let reminder of reminders">
+    <td>{{ reminder.plantName }}</td>
+    <td>{{ reminder.task }}</td>
+    <td>{{ reminder.dueDate | date: 'shortDate' }}</td>
+  </tr>
+</table>
+<div *ngIf="reminders.length === 0" class="empty-state">No reminders yet.</div>

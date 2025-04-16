@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FindSinglePlantComponent } from './find-single-plant.component';
+import { GardenComponent } from './garden.component';
 
-describe('FindSinglePlantComponent', () => {
-  let component: FindSinglePlantComponent;
-  let fixture: ComponentFixture<FindSinglePlantComponent>;
+describe('GardenComponent', () => {
+  let component: GardenComponent;
+  let fixture: ComponentFixture<GardenComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FindSinglePlantComponent]
+      imports: [GardenComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FindSinglePlantComponent);
+    fixture = TestBed.createComponent(GardenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
