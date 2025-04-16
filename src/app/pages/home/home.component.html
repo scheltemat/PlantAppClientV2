@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div class="home-container">
+  <h2>Your Garden</h2>
+
+  <div *ngIf="isLoading" class="loading">Loading your plants...</div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div *ngIf="userPlants.length > 0" class="plant-list">
+    <div class="plant-card" *ngFor="let plant of userPlants">
+      <img
+        [src]="plant.imageUrl"
+        alt="{{ plant.name }}"
+        (error)="handleImageError($event)"
+        class="plant-image"
+      />
+      <div class="plant-name">{{ plant.name }}</div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && userPlants.length === 0" class="empty-state">
+    Your garden is empty.
+  </div>
+</div>

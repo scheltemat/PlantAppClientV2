@@ -3,20 +3,24 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
 
+// Response from backend health check
 interface HealthCheckResponse {
   message: string;
 }
 
+// Auth response
 interface LoginResponse {
   token: string;
 }
 
+// Metadata for external plant data
 interface PlantData {
   key: string;
   value: string;
 }
 
-interface Plant {
+// Returned when searching external plants
+export interface ExternalPlant {
   id: number;
   name: string;
   scientific_name: string;
@@ -28,8 +32,24 @@ interface Plant {
   data: PlantData[];
 }
 
+// Payload to add plant to garden
+export interface AddPlantRequest {
+  id: number; // Permapeople ID
+  name: string;
+  imageUrl: string;
+}
+
+// Returned from user's garden
+export interface UserPlant {
+  id: number; // Local DB ID
+  permapeopleId: number;
+  name: string;
+  imageUrl: string;
+}
+
+// Search API response structure
 interface PlantSearchResponse {
-  plants: Plant[];
+  plants: ExternalPlant[];
 }
 
 @Injectable({
@@ -58,6 +78,12 @@ export class ApiService {
     });
   }
 
+  getUserPlants(): Observable<UserPlant[]> {
+    return this.http.get<UserPlant[]>(`${this.baseUrl}/api/user-plants`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
   searchPlants(query: string): Observable<PlantSearchResponse> {
     return this.http.get<PlantSearchResponse>(
       `${this.baseUrl}/api/external/plants/search`,
@@ -68,11 +94,9 @@ export class ApiService {
     );
   }
 
-  addPlantToGarden(plantId: number): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/api/user/garden`,
-      { plantId },
-      { headers: this.getAuthHeaders() }
-    );
+  addPlantToGarden(plant: AddPlantRequest): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/user-plants`, plant, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }
