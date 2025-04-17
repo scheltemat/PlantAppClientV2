@@ -1,9 +1,32 @@
-<h3>Watering Reminders</h3>
-<table class="dashboard-table">
-  <tr *ngFor="let reminder of reminders">
-    <td>{{ reminder.plantName }}</td>
-    <td>{{ reminder.task }}</td>
-    <td>{{ reminder.dueDate | date: 'shortDate' }}</td>
-  </tr>
+<h3>Upcoming Care</h3>
+<table class="care-table" *ngIf="reminders.length > 0">
+  <thead>
+    <tr>
+      <th>Plant</th>
+      <th>Task</th>
+      <th>Due</th>
+      <th>Water?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reminder of reminders">
+      <td>{{ reminder.plantName }}</td>
+      <td>{{ reminder.task }}</td>
+      <td>{{ reminder.dueDate | date: 'MMM d, y' }}</td>
+      <td>
+        <button
+          *ngIf="reminder.needsWatering"
+          class="water-btn"
+          (click)="markAsWatered(reminder)"
+          [disabled]="loadingPlantId === reminder.plantId"
+        >
+          {{ loadingPlantId === reminder.plantId ? 'Watering...' : 'Water' }}
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
-<div *ngIf="reminders.length === 0" class="empty-state">No reminders yet.</div>
+
+<div *ngIf="reminders.length === 0" class="empty-reminder">
+  No plants need attention in the next few days. 🌿
+</div>

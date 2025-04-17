@@ -45,15 +45,23 @@ export class FindPlantComponent {
   }
 
   addToGarden(plant: ExternalPlant, event: MouseEvent) {
-    event.stopPropagation(); // Prevent card click
+    event.stopPropagation();
+
+    // Extract requirements with better handling
+    const waterReq = this.getPlantData(plant, "Water requirement") || "Moist";
+    const lightReq = this.getPlantData(plant, "Light requirement") || "Medium";
+
     const plantToSend: AddPlantRequest = {
       id: plant.id,
       name: plant.name,
       imageUrl: plant.images?.thumb || "",
+      waterRequirement: waterReq,
+      lightRequirement: lightReq,
     };
 
     this.apiService.addPlantToGarden(plantToSend).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log("Plant added with requirements:", response);
         alert(`${plant.name} added to your garden successfully!`);
       },
       error: (err) => {
@@ -64,7 +72,14 @@ export class FindPlantComponent {
   }
 
   getPlantData(plant: ExternalPlant, key: string): string | undefined {
-    const item = plant.data.find((d) => d.key === key);
+    // Some keys might have different capitalization in the API
+    const normalizedKey = key.toLowerCase();
+
+    // Find the matching data item (case insensitive)
+    const item = plant.data.find((d) =>
+      d.key.toLowerCase().includes(normalizedKey)
+    );
+
     return item?.value;
   }
 
