@@ -28,6 +28,8 @@ export interface AddPlantRequest {
   id: number; // Permapeople ID
   name: string;
   imageUrl: string;
+  waterRequirement: string;
+  lightRequirement: string;
 }
 
 // Returned from user's garden
@@ -36,6 +38,8 @@ export interface UserPlant {
   permapeopleId: number;
   name: string;
   imageUrl: string;
+  nextWatering: Date;
+  needsWatering: boolean;
 }
 
 // Search API response structure
@@ -84,5 +88,13 @@ export class ApiService {
 
   removePlantFromGarden(plantId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/api/user-plants/${plantId}`);
+  }
+
+  waterPlant(plantId: number): Observable<void> {
+    return this.http.post<void>(
+      `${this.baseUrl}/api/user-plants/water`,
+      { plantId },
+      { headers: this.authService.getAuthHeaders() }
+    );
   }
 }

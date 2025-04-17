@@ -54,6 +54,8 @@ export class PlantDetailComponent implements OnInit {
       id: this.plant.id,
       name: this.plant.name,
       imageUrl: this.plant.images?.thumb || "",
+      waterRequirement: this.getPlantData("Water requirement") || "Moist",
+      lightRequirement: this.getPlantData("Light requirement") || "Medium",
     };
 
     this.isAdding = true;
