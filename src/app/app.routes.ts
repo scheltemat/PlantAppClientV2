@@ -7,6 +7,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { FindPlantComponent } from "./pages/find-plant/find-plant.component";
 import { PlantDetailComponent } from "./pages/plant-detail/plant-detail.component";
 import { GardenComponent } from "./pages/garden/garden.component";
+import { RegisterComponent } from "./pages/register/register.component";
 
 export const routes: Routes = [
   // Unauthenticated routes
@@ -15,7 +16,16 @@ export const routes: Routes = [
     component: HealthCheckComponent,
     title: "Health Check",
   },
-  { path: "login", component: LoginComponent, title: "Login" },
+  {
+    path: "login",
+    component: LoginComponent,
+    title: "Login",
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+    title: "Register",
+  },
 
   // Authenticated routes
   {

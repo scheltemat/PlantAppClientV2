@@ -73,6 +73,7 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
+/* Register link (bottom text) */
 .register-link {
   margin-top: 1rem;
   text-align: center;
@@ -91,7 +92,7 @@ button[type="submit"]:disabled {
   color: #3367d6;
 }
 
-/* Loading indicator */
+/* Loading spinner */
 .loading {
   display: inline-block;
   margin-left: 0.5rem;

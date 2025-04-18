@@ -18,6 +18,23 @@ export class AuthService {
   private jwtHelper = inject(JwtHelperService);
   private http = inject(HttpClient);
 
+  register(
+    email: string,
+    phoneNumber: string,
+    password: string,
+    confirmPassword: string
+  ): Observable<void> {
+    return this.http.post<void>(
+      `${environment.apiBaseUrl}/api/auth/register`,
+      {
+        email,
+        phoneNumber,
+        password,
+        confirmPassword,
+      }
+    );
+  }
+
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
       `${environment.apiBaseUrl}/api/auth/login`,
