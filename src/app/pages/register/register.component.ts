@@ -55,7 +55,7 @@ export class RegisterComponent {
       .subscribe({
         next: () => {
           this.isLoading = false;
-          this.router.navigate(["/login"]); // 👈 navigate on success
+          this.router.navigate(["/login"]);
         },
         error: (err) => {
           this.isLoading = false;
