@@ -22,7 +22,7 @@ export class RegisterComponent {
   isLoading = false;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
@@ -35,6 +35,13 @@ export class RegisterComponent {
       },
       { validators: this.passwordsMatchValidator }
     );
+  }
+
+  ngOnInit(): void {
+    // If user is already logged in, redirect
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate([""]);
+    }
   }
 
   passwordsMatchValidator(form: FormGroup) {
