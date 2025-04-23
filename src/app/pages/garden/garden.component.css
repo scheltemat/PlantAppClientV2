@@ -1,60 +1,91 @@
 .home-container {
   padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2e7d32;
 }
 
 .plant-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .plant-card {
   position: relative;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 10px;
   padding: 1rem;
-  width: 160px;
-  text-align: center;
-  background-color: #fafafa;
+  width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* .plant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+} */
 
 .remove-button {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  background: transparent;
+  top: 8px;
+  right: 8px;
+  background: #ffebee;
   border: none;
-  color: #888;
+  color: #e53935;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  z-index: 1;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .remove-button:hover {
-  color: red;
+  background: #ffcdd2;
+  color: #b71c1c;
 }
 
 .plant-image {
   width: 100%;
-  height: auto;
-  border-radius: 4px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.plant-light {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #777;
 }
 
 .plant-name {
-  margin-top: 0.5rem;
-  font-weight: bold;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e7d32;
 }
 
 .empty-state {
   margin-top: 2rem;
   font-size: 1.2rem;
-  color: #666;
+  color: #999;
 }
 
 .loading {
   font-size: 1.1rem;
-  color: #333;
+  color: #555;
 }

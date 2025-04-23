@@ -38,6 +38,7 @@ export interface UserPlant {
   permapeopleId: number;
   name: string;
   imageUrl: string;
+  lightRequirement: string;
   nextWatering: Date;
   needsWatering: boolean;
 }
