@@ -61,6 +61,6 @@ Make sure the base API endpoint is configured in the environment file:
 // environment.ts
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api'
+  apiUrl: 'http://localhost:5000'
 };
 ```
